@@ -65,7 +65,8 @@ categories_data = [
     "Electronics",
     "Clothing",
     "Food",
-    ""
+    "Housing",
+    "Water-Refill",
 ]
 
 for name in categories_data:
