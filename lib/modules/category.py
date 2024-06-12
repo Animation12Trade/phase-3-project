@@ -22,6 +22,12 @@ class Category:
         print("Categories table created.")
 
     def save(self):
+
+        if Category.find_by_name(self.name):
+            print(f"Category {self.name} already exists.")
+            return
+
+            
         sql = "INSERT INTO categories (name) VALUES (?)"
         cursor.execute(sql, (self.name,))
         conn.commit()
@@ -38,6 +44,13 @@ class Category:
         sql = "SELECT * FROM categories WHERE id = ?"
         cursor.execute(sql, (id,))
         return cursor.fetchone()
+    
+    @classmethod
+    def find_by_name(cls, name):
+        sql = "SELECT * FROM categories WHERE name = ?"
+        cursor.execute(sql, (name,))
+        return cursor.fetchone()
+
 
     def delete(self):
         sql = "DELETE FROM categories WHERE id = ?"
@@ -52,7 +65,7 @@ categories_data = [
     "Electronics",
     "Clothing",
     "Food",
-    # Add more categories as needed
+    ""
 ]
 
 for name in categories_data:
