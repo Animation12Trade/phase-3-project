@@ -48,3 +48,21 @@ class Expense:
         sql = "DELETE FROM expenses WHERE id = ?"
         cursor.execute(sql, (self.id,))
         conn.commit()
+
+# Ensure the table exists
+Expense.create_table()
+
+
+expenses_data = [
+    ("Book purchase", "2024-06-12", 20.5, 1),  # Assuming 'Books' category has id 1
+    ("Groceries", "2024-06-11", 35.75, 4),    # Assuming 'Food' category has id 4
+    ("Rent", "2024-06-13", 27000.70, 6),
+    ("Electricity-Bill", "2024-07-17", 500.4, 5),
+    # Add more expenses as needed
+]
+
+for data in expenses_data:
+    expense = Expense(*data)
+    expense.save()
+
+print("Expenses table populated.")

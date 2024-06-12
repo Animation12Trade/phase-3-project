@@ -16,8 +16,10 @@ class Category:
             name TEXT NOT NULL UNIQUE
         )
         """
+        print("Creating categories table...")
         cursor.execute(sql)
         conn.commit()
+        print("Categories table created.")
 
     def save(self):
         sql = "INSERT INTO categories (name) VALUES (?)"
@@ -41,3 +43,20 @@ class Category:
         sql = "DELETE FROM categories WHERE id = ?"
         cursor.execute(sql, (self.id,))
         conn.commit()
+
+Category.create_table()
+
+# Populate categories with sample data
+categories_data = [
+    "Books",
+    "Electronics",
+    "Clothing",
+    "Food",
+    # Add more categories as needed
+]
+
+for name in categories_data:
+    category = Category(name)
+    category.save()
+
+print("Categories table populated.")

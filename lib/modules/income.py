@@ -48,3 +48,20 @@ class Income:
         sql = "DELETE FROM incomes WHERE id = ?"
         cursor.execute(sql, (self.id,))
         conn.commit()
+
+
+# Ensure the table exists
+Income.create_table()
+
+
+incomes_data = [
+    ("Salary", "2024-06-01", 2500.0, 3),  # Assuming 'Income' category has id 3
+    ("Freelance", "2024-05-28", 1200.0, 3),  # Assuming 'Income' category has id 3
+    # Add more incomes as needed
+]
+
+for data in incomes_data:
+    income = Income(*data)
+    income.save()
+
+print("Incomes table populated.")        
